@@ -1,0 +1,33 @@
+PSEUDOCODIGO FUMADORES
+
+
+fumadores[3], estanquero :condition
+ing_colocado :int
+
+procedure obtenerIngrediente(i);
+	begin
+		if(ing_colocado!=i)
+			fumadores[i].wait();
+		
+		ing_colocados := -1;
+		estanquero.signal();
+	end
+end
+
+
+procedure ponerIngrediente(i);
+	begin
+		ing_colocado := i;
+		fumadores[i].signal();
+	end
+end
+
+
+procedure esperarRecogidaIngrediente();
+	begin
+		if(ing_colocado != -1)
+			estanquero.wait();
+	end
+end
+
+

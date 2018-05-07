@@ -1,0 +1,68 @@
+
+PORTAFOLIO EJERCICIOS SEMINARIO 2 Y PRACTICA 2
+
+
+ACTIVIDADES SEMINARIO:
+
+Actividad 1. -> monitor_em.cpp
+	-Al quitar el unlock de MContador2::incremente, el cerrojo se queda pillado y no puede pasar a ejecutar las otras hebras.
+
+Actividad 2. -> barrera1_sc.cpp
+	- Porque la ultima hebra es la hebra señaladora, por tanto es la unica que continua su ejecucion y una vez que sale del monitor, libera el cerrojo a las demas hebras que estan en la cola del monitor.
+	
+	- Porque se genera un retardo aleatorio sin garantizar la exclusion mutua, por tanto llaman a la funcion cita del monitor de forma desordenada (funcion hebra). En cada iteracion, cada hebra debe esperar a que todas las demas lleguen (menos la ultima que es la señaladora), y van llegando de forma aleatoria, al estar todas a las puertas esperando para entrar.
+	
+	- El constructor no necesita ejecutarse en exclusión mutua ya que solamente es llamado una vez para crear el monitor por una sola hebra, la hebra principal del programa (main).
+
+	- Al cambiar notify_one() por notify_all() el resultado cambia de forma que las hebras salen de forma ordenada, es decir, tal y como entraron, menos la ultima que es la señaladora y es la que hace el notify_all(), despierta a todas las demas hebras de la cola.
+
+Actividad 3. -> Version FIFO Prodcons_sc.cpp
+	
+	ADJUNTO CODIGO EN FICHERO prodcons_fifo.cpp
+
+	- Se usan tres variables permanentes primera_libre, primera_ocupada y num_celdas_ocupadas. Las dos primeras son para acceder al buffer y como no permiten saber cuantas celdas ocupadas hay, se usa la nueva variable num_celdas_ocupadas. Las tres se inicializar a 0 en el cosntructor.
+
+Actividad 4. -> Monitores SU
+	- Que el orden de salida coincida con el orden de entrada se debe a que cuando las hebras hacen wait, las hebras que estan en la cola de urgentes se liberan de forma que la que antes entró, se libera la primera.
+
+
+____________________________________________________________________________________________________________________________________
+
+
+PRACTICA 2:
+
+PROBLEMA FUMADORES-MONITOR
+
+Incluido el codigo fuente en el fichero fumadores.cpp
+Incluido pseudocodigo en fichero pseudo_fumadores.txt
+
+Variables Permanentes usadas: 
+	ing_colocados -> Variable permanente de tipo entero para saber si el mostrador esta vacío o no.
+	Los valores posibles de esta variable son:
+		- -1 que representa mostrador vacío
+		- 0 representa fumador/ingrediente 0
+		- 1 representa fumador/ingrediente 1
+		- 2 representa fumador/ingrediente 2
+
+Colas condicion (Variables condicion):
+	Array de fumadores, con tamaño 3 de tipo condVar para controlar los fumadores, quienes toman ingredientes y fuman.
+	Estanquero de tipo condVar para controlar al estanquero, que pone ingredientes. 
+
+Prueba de su ejecución incluida en formato imagen.
+
+
+PROBLEMA BARBERÍA-MONITOR
+
+Incluido el codigo fuente en el fichero Barberia.cpp
+Incluido pseudo_codigo en fichero pseudo_barberia.txt
+
+Variables permanentes usadas:
+	silla_libre -> variable de tipo booleano para saber si la silla esta libre o no
+	Puede tomar o true cuando la silla esta ocupada, o false si queda libre
+
+Colas condicion:
+	Cliente condVar, para controlar la cola de clientes
+	Silla condVar, para controlar la silla de la barberia
+	Barbero condVar para controlar al barbero, dormir o despertar.
+
+Prueba de su ejecución incluida en formato imagen.

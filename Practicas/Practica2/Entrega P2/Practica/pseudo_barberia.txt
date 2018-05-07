@@ -1,0 +1,36 @@
+PSEUDOCODIGO BARBERIA
+
+cliente, silla, barbero :condition
+
+procedure cortarPelo(i);
+	begin
+		if(!silla.empty())
+			clientes.wait
+
+		barbero.signal;
+		cout<<"cliente avisa barbero y ocupa silla"
+		silla.wait;
+		cout<<"cliente deja silla libre"
+	end
+end
+
+
+procedure siguienteCliente;
+	begin
+		if(clientes.empty() && silla.empty())
+			barbero.wait
+			cout<< "barbero duerme"
+
+			clientes.signal()
+			cout<<"barbero recibe cliente"
+	end
+end
+
+
+
+procedure finCliente;
+	begin
+		silla_libre = true;
+		silla.signal
+	end
+end
